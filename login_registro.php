@@ -21,9 +21,11 @@ if($_POST){
 if (validarUsuario($conexion, $usuario, $password)) {
     $_SESSION["usuario"]=$usuario;
     echo "Logueado como: $usuario.";
+    header("Location: pagina.php");
 } else {
     if (crearUsuario($conexion, $usuario, $password)) {
         echo "Usuario $usuario creado con éxito.";
+        header("Location: pagina.php");
     } else {
         echo "Error al loguear o crear usuario.";
     }
