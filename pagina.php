@@ -35,6 +35,7 @@ if (!isset($_SESSION["usuario"])){
     <a href="consultas_modificar.php">Consultar o modificar la base de datos</a>
     <a href="pagina.php?accion=salir" style="float:right">Cerrar sesión</a>
 </div>
+<div class="intro">Bienvenido a la web de gestión de la base de datos de SOUNDER, aqui podrás consultar los datos de los usuarios, de los productos y añadir o modificar los productos de la tienda.</div>
 
 </body>
 </html>

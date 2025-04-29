@@ -45,6 +45,11 @@ if (isset($_POST['modificar_producto'])) {
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+<div class="menu">
+    <a href="pagina.php">Inicio</a>
+    <a href="consultas_modificar.php">Consultar o modificar la base de datos</a>
+    <a href="pagina.php?accion=salir" style="float:right">Cerrar sesión</a>
+</div>
     <h1>Gestión de Usuarios y Productos</h1>
 
     <form method="POST">
@@ -52,14 +57,14 @@ if (isset($_POST['modificar_producto'])) {
         <button type="submit" name="consulta_productos">Consultar Productos</button>
     </form>
 
-    <h2>Añadir Producto</h2>
+    <h2 class="alinear-izquierda">Añadir Producto</h2>
     <form method="POST">
         <input type="text" name="nombre_producto" placeholder="Nombre" required>
         <input type="number" name="precio_producto" placeholder="Precio" required>
         <button type="submit" name="añadir_producto">Añadir</button>
     </form>
 
-    <h2>Modificar Producto</h2>
+    <h2 class="alinear-izquierda">Modificar Producto</h2>
     <form method="POST">
         <input type="number" name="id_modificar" placeholder="ID del producto" required>
         <input type="text" name="nuevo_nombre" placeholder="Nuevo nombre" required>
