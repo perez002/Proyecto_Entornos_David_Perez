@@ -48,7 +48,7 @@ if ($_POST) {
 <body>
     <h1>Formulario de Login y Registro</h1>
 
-    <form method="POST" action="">
+    <form class="centrarformulario"method="POST" action="">
         <label for="usuario">Usuario:</label>
         <input type="text" name="usuario" id="usuario" required>
 
