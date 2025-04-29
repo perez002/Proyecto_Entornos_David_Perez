@@ -1,34 +1,37 @@
 <?php
 
+session_start();
+
 include("datos.php");
 include("funciones.php");
 
-session_start();
 
 $conexion=conectarBD($host,$usuario,$password,$bd,$puerto);
 
-if ($conexion){
-    echo "Conexión exitosa.";
-}else{
-    echo "Error de conexión.";
+if (!$conexion) {
+    echo "Error al conectar a la base de datos";
+    exit();
 }
 
-if($_POST){
-    $usuario=$_POST["usuario"];
-    $password=$_POST["password"];
-}
+if ($_POST) {
+    $usuario = $_POST["usuario"];
+    $password = $_POST["password"];
 
-if (validarUsuario($conexion, $usuario, $password)) {
-    $_SESSION["usuario"]=$usuario;
-    echo "Logueado como: $usuario.";
-    header("Location: pagina.php");
-} else {
-    if (crearUsuario($conexion, $usuario, $password)) {
-        echo "Usuario $usuario creado con éxito.";
+    if (validarUsuario($conexion, $usuario, $password)) {
+        $_SESSION["usuario"] = $usuario;
         header("Location: pagina.php");
+        exit();
     } else {
-        echo "Error al loguear o crear usuario.";
+        if (crearUsuario($conexion, $usuario, $password)) {
+            $_SESSION["usuario"] = $usuario; 
+            header("Location: pagina.php");
+            exit();
+        } else {
+            echo "El nombre de usuario ya existe.";
+        }
     }
+} else {
+    echo "Error al conectar la BBDD.";
 }
 
 
@@ -58,3 +61,4 @@ if (validarUsuario($conexion, $usuario, $password)) {
     </form>
 </body>
 </html>
+

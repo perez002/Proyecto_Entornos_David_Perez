@@ -9,7 +9,6 @@ function conectarBD($host,$usuario,$password,$bd,$puerto){
     if ($conexionBD){
         return $conexionBD;
     }else{
-        echo "Error al conectar con la base de datos";
         return false;
     }
 }
@@ -23,23 +22,29 @@ function validarUsuario($conexion,$usuario,$password){
         $usuarioEncontrado=mysqli_fetch_assoc($datosUsuario);
     
         if ($password === $usuarioEncontrado['password']){
-            echo "Logueado con éxito.";
+            return true;
         }
         }else{
-        echo "Usuario o contraseña incorrecto.";
+            return false;
         }
 
 }
 
-function crearUsuario($conexion,$usuario,$password){
-    $nuevoUsuario="INSERT INTO usuarios (usuario,password) VALUES ('$usuario', '$password')";
-    $resultado=mysqli_query($conexion,$nuevoUsuario);
+function crearUsuario($conexion, $usuario, $password){
+    $consultarUsuario = "SELECT * FROM usuarios WHERE usuario='$usuario'";
+    $resultadoConsulta = mysqli_query($conexion, $consultarUsuario);
+    
+    if(mysqli_num_rows($resultadoConsulta) > 0){
+        return false; 
+    }
 
-    if ($resultado){
-        echo "Usuario creado con éxito.";
+    $nuevoUsuario = "INSERT INTO usuarios (usuario, password) VALUES ('$usuario', '$password')";
+    $resultado = mysqli_query($conexion, $nuevoUsuario);
 
-    }else{
-        echo "Error al crear el usuario.";
+    if ($resultado) {
+        return true;
+    } else {
+        return false; 
     }
 }
 
