@@ -1,5 +1,8 @@
 <?php
 
+//empezamos todas las paginas iniciando la sesion del usuario para que permanezca en todas las paginas e incluimos las paginas de datos y funciones
+//para su correcto funcionamiento
+
 session_start();
 
 include("datos.php");
@@ -8,11 +11,14 @@ include("funciones.php");
 
 $conexion=conectarBD($host,$usuario,$password,$bd,$puerto);
 
+//comprobamos que se ha realizado la conexion a la base de datos, con la variable que le habiamos asignado todos los datos de la bbdd
 if (!$conexion) {
     echo "Error al conectar a la base de datos";
     exit();
 }
 
+//comprobamos que el usuario y contraseña introducidos se validen para hacer login o crearse en caso de que no exista, mandandote a la pagina de inicio y
+//devolviendo un error si se introduce un usuario que ya existe
 if ($_POST) {
     $usuario = $_POST["usuario"];
     $password = $_POST["password"];
@@ -32,10 +38,7 @@ if ($_POST) {
     }
 }
 
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">

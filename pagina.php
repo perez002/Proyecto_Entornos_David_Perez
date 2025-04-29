@@ -1,11 +1,15 @@
 <?php
 
+//empezamos todas las paginas iniciando la sesion del usuario para que permanezca en todas las paginas e incluimos las paginas de datos y funciones
+//para su correcto funcionamiento
+
 session_start();
 
 include("datos.php");
 include("funciones.php");
 
-
+//aqui hacemos que si se pincha en el enlace "cerrar sesion", se borre la sesion actual y la cookie que php crea por defecto con las sesiones
+//devolviendote a la pagina de login
 if (isset($_GET['accion']) && $_GET['accion'] == 'salir') {
     session_unset();
     session_destroy();
@@ -14,13 +18,15 @@ if (isset($_GET['accion']) && $_GET['accion'] == 'salir') {
     exit();
 }
 
+//comprobamos que la sesion del usuario siga activa, en caso contrario nos devuelve al login
 if (!isset($_SESSION["usuario"])){
     header("Location: login_registro.php");
     exit();
 }
 
 ?>
-
+<!-- Aqui tenemos el html de la pagina principal, con el menu de navegación que estara en el resto de paginas y una pequeña descripcion de la web,
+  ha quedado un poco seco pero no sabia que mas añadir aqui -->
 <!DOCTYPE html>
 <html lang="es">
 <head>

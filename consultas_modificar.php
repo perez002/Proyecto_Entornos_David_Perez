@@ -1,25 +1,30 @@
 <?php
+
+//empezamos todas las paginas iniciando la sesion del usuario para que permanezca en todas las paginas e incluimos las paginas de datos y funciones
+//para su correcto funcionamiento
+
 session_start();
+
 include("datos.php");
 include("funciones.php");
 
 $conexion = conectarBD($host, $usuario, $password, $bd, $puerto);
 
-// Consultar usuarios
+// Consultar usuarios si pinchamos el boton de consultar usuarios
 if (isset($_POST['consulta_usuarios'])) {
     $consultaUsuarios = "SELECT id, usuario FROM usuarios";
     $result = mysqli_query($conexion, $consultaUsuarios);
     $usuarios = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-// Consultar productos
+// Consultar productos si pinchamos el boton de consultar productos
 if (isset($_POST['consulta_productos'])) {
     $consultaProductos = "SELECT id, nombre, precio FROM productos";
     $result = mysqli_query($conexion, $consultaProductos);
     $productos = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-// Añadir producto
+// Añadir producto con los datos indicados al pinchar el boton añadir
 if (isset($_POST['añadir_producto'])) {
     $nombre = $_POST['nombre_producto'];
     $precio = $_POST['precio_producto'];
@@ -27,7 +32,7 @@ if (isset($_POST['añadir_producto'])) {
     mysqli_query($conexion, $insertar);
 }
 
-// Modificar producto
+// Modificar producto introduciendo el id, nombre y precio que queramos
 if (isset($_POST['modificar_producto'])) {
     $id = $_POST['id_modificar'];
     $nuevo_nombre = $_POST['nuevo_nombre'];
@@ -35,8 +40,17 @@ if (isset($_POST['modificar_producto'])) {
     $actualizar = "UPDATE productos SET nombre='$nuevo_nombre', precio=$nuevo_precio WHERE id=$id";
     mysqli_query($conexion, $actualizar);
 }
-?>
 
+// Borrar producto intriduciendo unicamente su id
+if (isset($_POST['borrar_producto'])) {
+    $id_borrar = $_POST['id_borrar'];
+    $borrar = "DELETE FROM productos WHERE id=$id_borrar";
+    mysqli_query($conexion, $borrar);
+}
+
+?>
+<!-- Aqui tenemos el html con el menu como en el resto y los formularios para rellenar segun escojamos una opcion u otra,
+     o ver los usuarios/productos si se pincha el boton de cada uno, mostrandlos en tablas-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -72,7 +86,13 @@ if (isset($_POST['modificar_producto'])) {
         <button type="submit" name="modificar_producto">Modificar</button>
     </form>
 
-    <div style="margin-top: 30px;">
+    <h2 class="alinear-izquierda">Borrar Producto</h2>
+    <form method="POST">
+        <input type="number" name="id_borrar" placeholder="ID del producto" required>
+        <button type="submit" name="borrar_producto">Borrar</button>
+    </form>
+
+    <div>
         <?php
         if (isset($usuarios)) {
             echo "<h2>Usuarios Consultados</h2>";

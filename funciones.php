@@ -2,6 +2,7 @@
 
 include("datos.php");
 
+//funcion para conectar con la base de datos, y verificar que se ha conectado
 function conectarBD($host,$usuario,$password,$bd,$puerto){
 
     $conexionBD = mysqli_connect($host,$usuario,$password,$bd,$puerto);
@@ -13,6 +14,7 @@ function conectarBD($host,$usuario,$password,$bd,$puerto){
     }
 }
 
+//funcion para ver si el usuario existe y si la contraseña coincide con el usuario si existe
 function validarUsuario($conexion,$usuario,$password){
 
     $consultarUsuario="SELECT * FROM usuarios WHERE usuario='$usuario' AND password='$password'";
@@ -30,6 +32,7 @@ function validarUsuario($conexion,$usuario,$password){
 
 }
 
+//funcion para crear el usuario en el caso de que no exista
 function crearUsuario($conexion, $usuario, $password){
     $consultarUsuario = "SELECT * FROM usuarios WHERE usuario='$usuario'";
     $resultadoConsulta = mysqli_query($conexion, $consultarUsuario);
