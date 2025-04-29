@@ -30,8 +30,6 @@ if ($_POST) {
             echo "El nombre de usuario ya existe.";
         }
     }
-} else {
-    echo "Error al conectar la BBDD.";
 }
 
 

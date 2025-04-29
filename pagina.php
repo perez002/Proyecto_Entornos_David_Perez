@@ -19,10 +19,6 @@ if (!isset($_SESSION["usuario"])){
     exit();
 }
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -39,12 +35,6 @@ if (!isset($_SESSION["usuario"])){
     <a href="consultas_modificar.php">Consultar o modificar la base de datos</a>
     <a href="pagina.php?accion=salir" style="float:right">Cerrar sesión</a>
 </div>
-<div class="contenido">
-    <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?>!</h1>
-    <p>Selecciona una opción en el menú superior para navegar.</p>
-</div>
-
-
 
 </body>
 </html>
