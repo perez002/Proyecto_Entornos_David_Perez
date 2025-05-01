@@ -1,0 +1,15 @@
+CREATE DATABASE tienda_online;
+
+USE tienda_online;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    contraseña VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio INT NOT NULL
+);
